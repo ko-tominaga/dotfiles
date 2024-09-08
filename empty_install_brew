@@ -25,6 +25,7 @@ formulas=(
   go
   zsh-completions
   zsh-autosuggestions
+  zsh-git-prompt
 )
 
 echo "brew tap"

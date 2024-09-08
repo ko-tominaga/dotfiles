@@ -1,3 +1,8 @@
+autoload -Uz colors && colors
+PROMPT="%F{green}%n%f %F{cyan}($(arch))%f:%F{blue}%~%f"$'\n'"%# "
+source $(brew --prefix)/opt/zsh-git-prompt/zshrc.sh
+alias python="python3"
+
 export PATH="/Applications/RubyMine.app/Contents/MacOS:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.rbenv/shims:$PATH"
@@ -14,3 +19,14 @@ if type brew &>/dev/null; then
   autoload -Uz compinit && compinit
 fi
 
+git_prompt() {
+  if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = true ]; then
+    PROMPT="%F{034}%h%f:%F{020}%~%f $(git_super_status)"$'\n'"%# "
+  else
+    PROMPT="%F{green}%n%f %F{cyan}($(arch))%f:%F{blue}%~%f"$'\n'"%# "
+  fi
+}
+
+precmd() {
+  git_prompt
+}
