@@ -22,6 +22,7 @@ formulas=(
   warp
   yarn
   mas
+  zsh-completions
 )
 
 echo "brew tap"
