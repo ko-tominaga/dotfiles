@@ -37,6 +37,10 @@ apps=(
   slack
   visual-studio-code
   corsor
+  clipy
+  rectangle
+  rubymine
+  raycast
 )
 
 echo "brew tap"
