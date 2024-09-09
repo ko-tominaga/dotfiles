@@ -12,7 +12,7 @@ which brew >/dev/null 2>&1 && brew update
 echo "ok. run brew upgrade..."
 brew upgrade
 
-formulas=(
+apps=(
   gh
   git
   mysql
@@ -26,19 +26,7 @@ formulas=(
   zsh-completions
   zsh-autosuggestions
   zsh-git-prompt
-)
 
-echo "brew tap"
-# brew tap thirdparty
-brew tap homebrew/cask-fonts
-
-echo "brew install formula"
-for formula in "${formulas[@]}"; do
-  brew install $formula || brew upgrade $formula
-done
-
-# install gui up
-casks=(
   deepl
   docker
   dropbox
@@ -51,9 +39,13 @@ casks=(
   corsor
 )
 
-echo "brew casks"
-for cask in "${casks[@]}"; do
-  brew install --cask $cask
+echo "brew tap"
+# brew tap thirdparty
+brew tap homebrew/cask-fonts
+
+echo "brew install apps"
+for app in "${apps[@]}"; do
+  brew install $app || brew upgrade $app
 done
 
 # stores=(
