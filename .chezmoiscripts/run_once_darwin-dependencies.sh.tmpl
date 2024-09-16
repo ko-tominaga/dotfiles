@@ -1,0 +1,14 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+echo "installing Xcode Command Line Tools..."
+if ! xcode-select -p >/dev/null; then
+  xcode-select --install
+  wait
+fi
+
+echo "installing homebrew..."
+which brew >/dev/null 2>&1 || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+{{ end -}}
+
