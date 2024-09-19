@@ -1,0 +1,11 @@
+[user]
+	name = ko-tominaga
+	email = tominaga.53253@gmail.com
+[alias]
+	co = checkout
+	br = branch
+	cm = commit
+	st = status
+	lg = log --oneline --graph --all --decorate
+[http]
+	postBuffer = 524288000
