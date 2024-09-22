@@ -1,6 +1,7 @@
 packages:
   darwin:
     brews:
+      - 'fzf'
       - 'gh'
       - 'git'
       - 'go'
