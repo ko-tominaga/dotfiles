@@ -1,32 +1,57 @@
-autoload -Uz colors && colors
-PROMPT="%F{green}%n%f %F{cyan}($(arch))%f:%F{blue}%~%f"$'\n'"%# "
-source $(brew --prefix)/opt/zsh-git-prompt/zshrc.sh
+# -------------------
+# Aliases
+# -------------------
+alias g="git"
+alias ls="ls -lah"
+alias che="chezmoi"
 alias python="python3"
 
+# -------------------
+# Zsh Prompt Settings
+# -------------------
+autoload -Uz colors && colors
+PROMPT="%F{green}%n%f %F{cyan}($(arch))%f:%F{blue}%~%f"$'\n'"%# "
+
+# Git Prompt (for showing git branch and status in prompt)
+source $(brew --prefix)/opt/zsh-git-prompt/zshrc.sh
+
+# -------------------
+# Path Settings
+# -------------------
 export PATH="/Applications/RubyMine.app/Contents/MacOS:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.rbenv/shims:$PATH"
 export PATH=$PATH:$(go env GOPATH)/bin
+
+# -------------------
+# Homebrew and Completions
+# -------------------
 if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-    autoload -Uz compinit
-    compinit
+  # Set Homebrew's Zsh site functions
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+  autoload -Uz compinit
+  compinit
 fi
 
 if type brew &>/dev/null; then
+  # Zsh completions and suggestions
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
   source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   autoload -Uz compinit && compinit
 fi
 
+# -------------------
+# Git Prompt Function (for git status in prompt)
+# -------------------
 git_prompt() {
-  if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = true ]; then
+  if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = true ]; then
     PROMPT="%F{034}%h%f:%F{020}%~%f $(git_super_status)"$'\n'"%# "
   else
     PROMPT="%F{green}%n%f %F{cyan}($(arch))%f:%F{blue}%~%f"$'\n'"%# "
   fi
 }
 
+# Update prompt with git status before each command
 precmd() {
   git_prompt
 }
