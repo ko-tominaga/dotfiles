@@ -9,3 +9,5 @@
 	lg = log --oneline --graph --all --decorate
 [http]
 	postBuffer = 524288000
+[push]
+	default = upstream
