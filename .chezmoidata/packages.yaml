@@ -16,7 +16,7 @@ packages:
       - 'zsh-syntax-highlighting'
     casks:
       - 'clipy'
-      - 'corsor'
+      - 'cursor'
       - 'deepl'
       - 'docker'
       - 'dropbox'
