@@ -51,6 +51,12 @@ fbr() {
 }
 
 # -------------------
+# bindkeys
+# -------------------
+zle -N bind_fbr fbr
+bindkey '^B' bind_fbr
+
+# -------------------
 # Git Prompt Function (for git status in prompt)
 # -------------------
 git_prompt() {
