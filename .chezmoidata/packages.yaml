@@ -22,6 +22,7 @@ packages:
       - 'docker'
       - 'dropbox'
       - 'notion'
+      - 'orbstack'
       - 'obs'
       - 'obsidian'
       - 'raycast'
