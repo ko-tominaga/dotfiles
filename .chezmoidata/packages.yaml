@@ -16,7 +16,6 @@ packages:
       - 'zsh-git-prompt'
       - 'zsh-syntax-highlighting'
     casks:
-      - 'clipy'
       - 'cursor'
       - 'deepl'
       - 'docker'
