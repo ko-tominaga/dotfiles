@@ -51,6 +51,13 @@ fbr() {
 }
 
 # -------------------
+# Import .env
+# -------------------
+if [ -f ~/.env ]; then
+  source ~/.env
+fi
+
+# -------------------
 # bindkeys
 # -------------------
 zle -N bind_fbr fbr
