@@ -15,6 +15,7 @@ packages:
       - 'zsh-completions'
       - 'zsh-git-prompt'
       - 'zsh-syntax-highlighting'
+      - 'awscli'
     casks:
       - 'cursor'
       - 'deepl'
