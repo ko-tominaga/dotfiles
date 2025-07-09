@@ -1,16 +1,88 @@
-name: test
-on: 
+name: Test Dotfiles
+
+on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
+
 jobs:
-  test:
-      name: Test
-      runs-on: macos-latest
-      steps:
-        - name: Install chezmoi
-          run: brew install chezmoi
-        - name: Initialize chezmoi
-          run: chezmoi init https://github.com/ko-tominaga/dotfiles.git
-        - name: Apply chezmoi
-          run: chezmoi apply
+  lint:
+    name: Lint Configuration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate YAML files
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y yamllint
+          find . -name "*.yaml" -o -name "*.yml" | xargs yamllint -d relaxed
+
+  test-macos:
+    name: Test on macOS
+    runs-on: macos-latest
+    needs: lint
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install chezmoi
+        run: |
+          brew install chezmoi
+          chezmoi --version
+
+      - name: Initialize chezmoi
+        run: |
+          chezmoi init --apply=false ${{ github.workspace }}
+
+      - name: Validate chezmoi configuration
+        run: |
+          chezmoi data
+          chezmoi managed
+
+      - name: Dry run chezmoi apply
+        run: |
+          echo "Running chezmoi apply in dry-run mode..."
+          chezmoi apply --dry-run --verbose
+
+      - name: Check for differences
+        run: |
+          echo "Checking what would be changed..."
+          chezmoi diff || true
+
+  test-ubuntu:
+    name: Test on Ubuntu
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install chezmoi
+        run: |
+          sh -c "$(curl -fsLS get.chezmoi.io)"
+          sudo mv ./bin/chezmoi /usr/local/bin/
+          chezmoi --version
+
+      - name: Initialize chezmoi
+        run: |
+          chezmoi init --apply=false ${{ github.workspace }}
+
+      - name: Validate chezmoi configuration
+        run: |
+          chezmoi data
+          chezmoi managed
+
+      - name: Dry run chezmoi apply
+        run: |
+          echo "Running chezmoi apply in dry-run mode..."
+          chezmoi apply --dry-run --verbose
+
+      - name: Check for differences
+        run: |
+          echo "Checking what would be changed..."
+          chezmoi diff || true
