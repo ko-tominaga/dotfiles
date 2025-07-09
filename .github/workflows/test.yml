@@ -53,36 +53,3 @@ jobs:
         run: |
           echo "Checking what would be changed..."
           chezmoi diff || true
-
-  test-ubuntu:
-    name: Test on Ubuntu
-    runs-on: ubuntu-latest
-    needs: lint
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install chezmoi
-        run: |
-          sh -c "$(curl -fsLS get.chezmoi.io)"
-          sudo mv ./bin/chezmoi /usr/local/bin/
-          chezmoi --version
-
-      - name: Initialize chezmoi
-        run: |
-          chezmoi init --apply=false ${{ github.workspace }}
-
-      - name: Validate chezmoi configuration
-        run: |
-          chezmoi data
-          chezmoi managed
-
-      - name: Dry run chezmoi apply
-        run: |
-          echo "Running chezmoi apply in dry-run mode..."
-          chezmoi apply --dry-run --verbose
-
-      - name: Check for differences
-        run: |
-          echo "Checking what would be changed..."
-          chezmoi diff || true
