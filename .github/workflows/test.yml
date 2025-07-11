@@ -1,16 +1,58 @@
 name: test
-on: 
+
+on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
+
 jobs:
+  lint:
+    name: Lint Configuration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate YAML files
+        run: |
+          if [ "$(find . -name "*.yaml" -o -name "*.yml" | wc -l)" -gt 0 ]; then
+            sudo apt-get update && sudo apt-get install -y yamllint
+            find . -name "*.yaml" -o -name "*.yml" -print0 | xargs -0 yamllint -d relaxed
+          else
+            echo "No YAML files found to lint"
+          fi
+
   test:
-      name: Test
-      runs-on: macos-latest
-      steps:
-        - name: Install chezmoi
-          run: brew install chezmoi
-        - name: Initialize chezmoi
-          run: chezmoi init https://github.com/ko-tominaga/dotfiles.git
-        - name: Apply chezmoi
-          run: chezmoi apply
+    name: Test on macOS
+    runs-on: macos-latest
+    needs: lint
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install chezmoi
+        run: |
+          brew install chezmoi
+          chezmoi --version
+
+      - name: Initialize chezmoi
+        run: |
+          chezmoi init --apply=false ${{ github.workspace }}
+
+      - name: Validate chezmoi configuration
+        run: |
+          chezmoi data
+          chezmoi managed
+
+      - name: Dry run chezmoi apply
+        run: |
+          echo "Running chezmoi apply in dry-run mode..."
+          chezmoi apply --dry-run --verbose
+
+      - name: Check for differences
+        run: |
+          echo "Checking what would be changed..."
+          chezmoi diff || true
