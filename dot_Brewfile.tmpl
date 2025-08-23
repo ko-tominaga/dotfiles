@@ -1,0 +1,12 @@
+{{- if eq .chezmoi.os "darwin" -}}
+{{- with .packages.darwin }}
+
+{{- range .brews }}
+brew "{{ . }}"
+{{- end }}
+
+{{- range .casks }}
+cask "{{ . }}"
+{{- end }}
+{{- end }}
+{{- end -}}
