@@ -1,0 +1,76 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+log()  { printf '[brew-setup] %s\n' "$*"; }
+warn() { printf '[brew-setup][warn] %s\n' "$*" >&2; }
+fail() { printf '[brew-setup][error] %s\n' "$*" >&2; exit 1; }
+
+BREWFILE_PATH="${HOME}/Brewfile"
+
+# Xcode CLT チェック
+if ! xcode-select -p >/dev/null 2>&1; then
+  warn "Not installed Xcode Command Line Tools. Run installer."
+  xcode-select --install || true
+  warn "Please run this script again after installing CLT."
+  exit 0
+fi
+
+# Homebrew インストール
+if ! command -v brew >/dev/null 2>&1; then
+  log "Not installed Homebrew. Try to install."
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
+    || fail "Failed to install Homebrew."
+
+  # Apple Silicon / Intel の順で PATH 取り込み
+  if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [ -x /usr/local/bin/brew ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+fi
+
+# 念のため再取り込み（zprofile 追記直後を想定）
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x /usr/local/bin/brew ]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+command -v brew >/dev/null 2>&1 || fail "brew command is not available. Please check PATH."
+
+log "brew doctor..."
+brew doctor || warn "brew doctor has warnings. Please check later."
+
+log "brew update..."
+brew update
+
+# Brewfile 存在確認
+if [ ! -f "${BREWFILE_PATH}" ]; then
+  fail "Brewfile not found: ${BREWFILE_PATH}"
+fi
+
+log "brew bundle check..."
+if brew bundle check --file="${BREWFILE_PATH}" >/dev/null 2>&1; then
+  log "No items to install. Skip."
+  exit 0
+fi
+
+# オプションはテンプレ変数で切替（data 配下なら .data.brew_bundle に変えてください）
+BUNDLE_FLAGS=()
+{{- if or (and (hasKey . "brew_bundle") (hasKey .brew_bundle "verbose") .brew_bundle.verbose) (not (hasKey . "brew_bundle")) }}
+BUNDLE_FLAGS+=("--verbose")
+{{- end }}
+{{- if and (hasKey . "brew_bundle") (hasKey .brew_bundle "no_lock") (eq .brew_bundle.no_lock true) }}
+BUNDLE_FLAGS+=("--no-lock")
+{{- end }}
+{{- if and (hasKey . "brew_bundle") (hasKey .brew_bundle "no_upgrade") (eq .brew_bundle.no_upgrade true) }}
+BUNDLE_FLAGS+=("--no-upgrade")
+{{- end }}
+
+log "brew bundle install..."
+brew bundle install --file="${BREWFILE_PATH}" "${BUNDLE_FLAGS[@]}" \
+  || fail "Failed to install brew bundle."
+
+log "Done."
+{{- end -}}
