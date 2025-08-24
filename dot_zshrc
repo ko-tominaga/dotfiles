@@ -5,7 +5,7 @@ alias g="git"
 alias ls="ls -lah"
 alias che="chezmoi"
 alias python="python3"
-alias claude=NODENV_VERSION=20.9.0 claude 
+alias claude="NODENV_VERSION=20.9.0 claude"
 
 # -------------------
 # Zsh Prompt Settings

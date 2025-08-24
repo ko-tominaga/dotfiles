@@ -1,4 +1,7 @@
-# Git Commit & Push
+---
+description: ステージングされた変更をコミットしてプッシュする
+---
+# Commit & Push
 
 ステージングされた変更をコミットしてプッシュします。Conventional Commits形式のコミットメッセージを英語で作成します。
 
@@ -7,7 +10,7 @@
 このコマンドは現在のワーキングディレクトリで以下の操作を実行します
 
 1. **git addは実行しません**（事前にステージングされている変更のみ対象）
-2. branchがmaster or mainでは無い事を確認。master or mainの場合はbranchを作成してください。
+2. branchがmaster or mainでは無い事を確認。master or mainの場合はbranchを作成してください。ブランチ名は`ko-tominaga/`から始まるようにしてください。
 3. Conventional Commits形式でコミットメッセージを作成
 4. 変更をコミット
 5. リモートリポジトリにプッシュ

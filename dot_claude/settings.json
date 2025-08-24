@@ -111,5 +111,12 @@
   },
   "feedbackSurveyState": {
     "lastShownTime": 1754560507535
+  },
+  "env": {
+    "CLAUDE_CODE_USE_BEDROCK": "1",
+    "AWS_REGION": "us-east-1",
+    "AWS_PROFILE": "local-bedrock",
+    "ANTHROPIC_MODEL": "REMOVED",
+    "ANTHROPIC_SMALL_FAST_MODEL": "REMOVED"
   }
 }
