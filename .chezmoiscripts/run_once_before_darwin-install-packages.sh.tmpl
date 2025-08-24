@@ -6,7 +6,7 @@ log()  { printf '[brew-setup] %s\n' "$*"; }
 warn() { printf '[brew-setup][warn] %s\n' "$*" >&2; }
 fail() { printf '[brew-setup][error] %s\n' "$*" >&2; exit 1; }
 
-BREWFILE_PATH="${HOME}/Brewfile"
+BREWFILE_PATH="${HOME}/.Brewfile"
 
 # Xcode CLT チェック
 if ! xcode-select -p >/dev/null 2>&1; then
@@ -45,9 +45,16 @@ brew doctor || warn "brew doctor has warnings. Please check later."
 log "brew update..."
 brew update
 
-# Brewfile 存在確認
 if [ ! -f "${BREWFILE_PATH}" ]; then
-  fail "Brewfile not found: ${BREWFILE_PATH}"
+  log "Brewfile not found. Generating from template..."
+
+  if command -v chezmoi >/dev/null 2>&1; then
+    chezmoi execute-template < "${HOME}/.local/share/chezmoi/dot_Brewfile.tmpl" > "${BREWFILE_PATH}" \
+      || fail "Failed to generate Brewfile from template."
+    log "Brewfile generated successfully."
+  else
+    fail "chezmoi command not available. Cannot generate Brewfile."
+  fi
 fi
 
 log "brew bundle check..."
