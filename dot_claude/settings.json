@@ -86,6 +86,7 @@
       "Bash(gh pr list:*)",
       "Bash(gh pr view:*)",
       "Bash(gh pr diff:*)",
+      "Bash(gh pr create:*)",
       "Bash(gh issue create:*)",
       "Bash(gh issue edit:*)",
       "Bash(git checkout:*)",
@@ -111,5 +112,12 @@
   },
   "feedbackSurveyState": {
     "lastShownTime": 1754560507535
+  },
+  "env": {
+    "CLAUDE_CODE_USE_BEDROCK": "1",
+    "AWS_REGION": "us-east-1",
+    "AWS_PROFILE": "local-bedrock",
+    "ANTHROPIC_MODEL": "arn:aws:bedrock:us-east-1:096233016669:application-inference-profile/404jh654xpbz",
+    "ANTHROPIC_SMALL_FAST_MODEL": "arn:aws:bedrock:us-east-1:096233016669:application-inference-profile/hutxlnhd5v9e"
   }
 }
