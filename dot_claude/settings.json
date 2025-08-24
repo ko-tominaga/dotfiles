@@ -86,6 +86,7 @@
       "Bash(gh pr list:*)",
       "Bash(gh pr view:*)",
       "Bash(gh pr diff:*)",
+      "Bash(gh pr create:*)",
       "Bash(gh issue create:*)",
       "Bash(gh issue edit:*)",
       "Bash(git checkout:*)",
