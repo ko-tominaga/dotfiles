@@ -16,6 +16,8 @@ packages:
       - 'zsh-git-prompt'
       - 'zsh-syntax-highlighting'
       - 'awscli'
+      - '1password-cli'
+      - 'mcp-proxy'
     casks:
       - 'cursor'
       - 'deepl'
