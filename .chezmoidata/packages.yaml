@@ -18,6 +18,7 @@ packages:
       - 'awscli'
       - '1password-cli'
       - 'mcp-proxy'
+      - 'codex'
     casks:
       - 'cursor'
       - 'deepl'
