@@ -25,6 +25,10 @@ args = [
   "streamablehttp",
   "-H",
   "Authorization",
+  {{- if eq .chezmoi.os "darwin" }}
   "Bearer {{ onepasswordRead "op://Personal/GitHub PAT/token" }}",
+  {{- else }}
+  "Bearer YOUR_GITHUB_TOKEN_HERE",
+  {{- end }}
   "https://api.githubcopilot.com/mcp/",
 ]
