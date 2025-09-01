@@ -79,5 +79,15 @@ log "brew bundle install..."
 brew bundle install --file="${BREWFILE_PATH}" "${BUNDLE_FLAGS[@]}" \
   || fail "Failed to install brew bundle."
 
+# uv (Python package manager with uvx) インストール
+if ! command -v uv >/dev/null 2>&1; then
+  log "Installing uv (Python package manager)..."
+  curl -LsSf https://astral.sh/uv/install.sh | sh \
+    || fail "Failed to install uv."
+  log "uv installed successfully."
+else
+  log "uv is already installed."
+fi
+
 log "Done."
 {{- end -}}
