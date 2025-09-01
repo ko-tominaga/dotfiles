@@ -16,6 +16,7 @@ packages:
       - 'zsh-git-prompt'
       - 'zsh-syntax-highlighting'
       - 'awscli'
+      - 'codex'
     casks:
       - 'cursor'
       - 'deepl'
