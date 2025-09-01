@@ -7,7 +7,7 @@ approval_policy = "never"
 
 # Sandbox mode: controls what commands can access
 # Options: "read-only", "workspace-write", "danger-full-access"
-sandbox_mode = "workspace-write"
+sandbox_mode = "danger-full-access"
 
 [sandbox_workspace_write]
 # Allow network access in workspace-write mode
@@ -16,9 +16,14 @@ network_access = true
 # MCP Servers configuration
 [mcp_servers.serena]
 command = "uvx"
-args = ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "codex"]
+args = [
+  "--from", "git+https://github.com/oraios/serena",
+  "serena", "start-mcp-server",
+  "--context", "codex",
+  "--enable-web-dashboard", "False"
+]
 
-{{- $isCI := or (env "CI") (env "GITHUB_ACTIONS") }}
+{{ $isCI := or (env "CI") (env "GITHUB_ACTIONS") }}
 [mcp_servers.github]
 command = "mcp-proxy"
 args = [
