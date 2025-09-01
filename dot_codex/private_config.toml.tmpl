@@ -18,14 +18,18 @@ network_access = true
 command = "uvx"
 args = ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "codex"]
 
-{{- if eq .chezmoi.os "darwin" -}}
+{{- $isCI := or (env "CI") (env "GITHUB_ACTIONS") -}}
+[mcp_servers.github]
 command = "mcp-proxy"
 args = [
   "--transport",
   "streamablehttp",
   "-H",
   "Authorization",
+{{- if and (eq .chezmoi.os "darwin") (not $isCI) -}}
   "Bearer {{ onepasswordRead "op://Personal/GitHub PAT/token" }}",
+{{- else -}}
+  "Bearer YOUR_GITHUB_TOKEN_HERE",
+{{- end }}
   "https://api.githubcopilot.com/mcp/",
 ]
-{{- end }}
