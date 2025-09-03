@@ -16,7 +16,6 @@ packages:
       - 'zsh-git-prompt'
       - 'zsh-syntax-highlighting'
       - 'awscli'
-      - '1password-cli'
       - 'mcp-proxy'
       - 'codex'
     casks:
@@ -35,3 +34,4 @@ packages:
       - 'warp'
       - '1password'
       - 'chatgpt'
+      - '1password-cli'
