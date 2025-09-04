@@ -1,0 +1,45 @@
+{{ $isCI := or (env "CI") (env "GITHUB_ACTIONS") }}
+{
+  "mcpServers": {
+    "context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "env": {}
+    },
+    "github": {
+      "type": "stdio",
+      "command": "mcp-proxy",
+      "args": [
+        "--transport",
+        "streamablehttp",
+        "-H",
+        "Authorization",
+{{- if and (eq .chezmoi.os "darwin") (not $isCI) }}
+        "Bearer {{ onepasswordRead "op://Personal/GitHub PAT/token" }}",
+{{- else }}
+        "Bearer YOUR_GITHUB_TOKEN_HERE",
+{{- end }}
+        "https://api.githubcopilot.com/mcp/"
+      ],
+      "env": {}
+    },
+    "serena": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena-mcp-server",
+        "--context",
+        "ide-assistant",
+        "--enable-web-dashboard",
+        "False"
+      ],
+      "env": {}
+    }
+  }
+}
