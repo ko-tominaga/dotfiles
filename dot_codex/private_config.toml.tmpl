@@ -9,9 +9,14 @@ approval_policy = "never"
 # Options: "read-only", "workspace-write", "danger-full-access"
 sandbox_mode = "danger-full-access"
 
+notify = ["bash", "-lc", "afplay /System/Library/Sounds/Ping.aiff"]
+
 [sandbox_workspace_write]
 # Allow network access in workspace-write mode
 network_access = true
+
+[tools]
+web_search = true
 
 # MCP Servers configuration
 [mcp_servers.serena]
