@@ -1,5 +1,15 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "CLAUDE_CODE_USE_BEDROCK": "1",
+    "AWS_REGION": "us-east-1",
+    "AWS_PROFILE": "local-bedrock",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "arn:aws:bedrock:us-east-1:096233016669:application-inference-profile/w7swxvx62vum",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "arn:aws:bedrock:us-east-1:096233016669:application-inference-profile/ug44jmmskm03",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "arn:aws:bedrock:us-east-1:096233016669:application-inference-profile/bs36o7kf43bd",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "arn:aws:bedrock:us-east-1:096233016669:application-inference-profile/ug44jmmskm03"
+
+  },
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
@@ -116,14 +126,32 @@
     ],
     "deny": []
   },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude Codeが許可を求めています\" with title \"Claude Code\" subtitle \"確認待ち\" sound name \"Glass\"'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Ping.aiff"
+          }
+        ]
+      }
+    ]
+  },
+  "alwaysThinkingEnabled": false,
   "feedbackSurveyState": {
     "lastShownTime": 1754560507535
-  },
-  "env": {
-    "CLAUDE_CODE_USE_BEDROCK": "1",
-    "AWS_REGION": "us-east-1",
-    "AWS_PROFILE": "local-bedrock",
-    "ANTHROPIC_MODEL": "arn:aws:bedrock:us-east-1:096233016669:application-inference-profile/404jh654xpbz",
-    "ANTHROPIC_SMALL_FAST_MODEL": "arn:aws:bedrock:us-east-1:096233016669:application-inference-profile/hutxlnhd5v9e"
   }
 }
