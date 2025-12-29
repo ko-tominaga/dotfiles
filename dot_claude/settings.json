@@ -69,6 +69,7 @@
       "Read(~/.ai_agents/*)",
       "Skill(create-pr)",
       "Skill(create-pr-body)",
+      "Skill(example-skills:skill-creator)",
       "mcp__github__create_pull_request",
       "mcp__github__get_issue",
       "mcp__github__add_issue_comment",
