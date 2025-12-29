@@ -1,0 +1,6 @@
+{{ $isCI := or (env "CI") (env "GITHUB_ACTIONS") -}}
+{{ if and (eq .chezmoi.os "darwin") (not $isCI) -}}
+export GITHUB_TOKEN="{{ onepasswordRead "op://Personal/GitHub PAT/token" }}"
+{{ else -}}
+export GITHUB_TOKEN="YOUR_GITHUB_TOKEN_HERE"
+{{ end -}}
