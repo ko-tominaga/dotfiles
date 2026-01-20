@@ -2,6 +2,11 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "includeCoAuthoredBy": false,
   "permissions": {
+    "defaultMode": "acceptEdits",
+    "deniedWebFetchPatterns": [
+      "Fetch(https://github.com/*)",
+      "Fetch(https://api.github.com/*)"
+    ],
     "allow": [
       "List(*)",
       "Fetch(*)",
@@ -55,6 +60,7 @@
       "Bash(gh issue edit:*)",
       "Bash(gh issue view:*)",
       "Bash(gh issue list:*)",
+      "Bash(gh api:*)",
       "Bash(git checkout:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
@@ -123,6 +129,8 @@
   },
   "alwaysThinkingEnabled": true,
   "enabledPlugins": {
-    "example-skills@anthropic-agent-skills": true
+    "example-skills@anthropic-agent-skills": true,
+    "context7@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true
   }
 }
