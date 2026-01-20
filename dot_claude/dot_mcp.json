@@ -18,10 +18,12 @@
         "streamablehttp",
         "-H",
         "Authorization",
-        "Bearer {$GITHUB_TOKEN}",
+        "Bearer ${GITHUB_TOKEN}",
         "https://api.githubcopilot.com/mcp/"
       ],
-      "env": {}
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      }
     },
     "serena": {
       "type": "stdio",
