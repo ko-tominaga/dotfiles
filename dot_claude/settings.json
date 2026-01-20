@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "includeCoAuthoredBy": false,
   "permissions": {
+    "defaultMode": "acceptEdits",
     "allow": [
       "List(*)",
       "Fetch(*)",
@@ -80,6 +81,7 @@
       "mcp__devinwiki__ask_question"
     ],
     "deny": [
+      "Fetch(https://api.github.com/*)",
       "Bash(rm:*)",
       "Bash(rm -rf:*)",
       "Bash(git reset:*)",
@@ -123,6 +125,8 @@
   },
   "alwaysThinkingEnabled": true,
   "enabledPlugins": {
-    "example-skills@anthropic-agent-skills": true
+    "example-skills@anthropic-agent-skills": true,
+    "context7@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true
   }
 }
