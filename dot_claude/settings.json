@@ -86,8 +86,6 @@
       "mcp__devinwiki__ask_question"
     ],
     "deny": [
-      "Bash(rm:*)",
-      "Bash(rm -rf:*)",
       "Bash(git reset:*)",
       "Bash(git rebase:*)",
       "Bash(sudo:*)",
