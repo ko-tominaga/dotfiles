@@ -1,12 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "includeCoAuthoredBy": false,
+  "includeCoAuthoredBy": true,
   "permissions": {
     "defaultMode": "acceptEdits",
-    "deniedWebFetchPatterns": [
-      "Fetch(https://github.com/*)",
-      "Fetch(https://api.github.com/*)"
-    ],
     "allow": [
       "List(*)",
       "Fetch(*)",
@@ -85,6 +81,10 @@
       "mcp__devinwiki__read_wiki_contents",
       "mcp__devinwiki__ask_question"
     ],
+    "deniedWebFetchPatterns": [
+      "Fetch(https://github.com/*)",
+      "Fetch(https://api.github.com/*)"
+    ],
     "deny": [
       "Bash(git reset:*)",
       "Bash(git rebase:*)",
@@ -129,6 +129,11 @@
   "enabledPlugins": {
     "example-skills@anthropic-agent-skills": true,
     "context7@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true
+    "code-review@claude-plugins-official": true,
+    "ruby-lsp@claude-plugins-official": true
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
   }
 }
