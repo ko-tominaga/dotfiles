@@ -10,6 +10,7 @@ approval_policy = "never"
 sandbox_mode = "danger-full-access"
 
 notify = ["bash", "-lc", "afplay /System/Library/Sounds/Ping.aiff"]
+model = "gpt-5.4
 
 [sandbox_workspace_write]
 # Allow network access in workspace-write mode
@@ -19,14 +20,6 @@ network_access = true
 web_search_request = true
 
 # MCP Servers configuration
-[mcp_servers.serena]
-command = "uvx"
-args = [
-  "--from", "git+https://github.com/oraios/serena",
-  "serena", "start-mcp-server",
-  "--context", "codex",
-  "--enable-web-dashboard", "False"
-]
 
 [mcp_servers.github]
 url = "https://api.githubcopilot.com/mcp/"
