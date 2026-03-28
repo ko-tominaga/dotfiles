@@ -10,16 +10,11 @@ approval_policy = "never"
 sandbox_mode = "danger-full-access"
 
 notify = ["bash", "-lc", "afplay /System/Library/Sounds/Ping.aiff"]
-model = "gpt-5.4
+model = "gpt-5.4"
 
 [sandbox_workspace_write]
 # Allow network access in workspace-write mode
 network_access = true
-
-[features]
-web_search_request = true
-
-# MCP Servers configuration
 
 [mcp_servers.github]
 url = "https://api.githubcopilot.com/mcp/"
@@ -32,3 +27,9 @@ args = [
   "-y",
   "@upstash/context7-mcp"
 ]
+
+[plugins."github@openai-curated"]
+enabled = true
+
+[plugins."google-drive@openai-curated"]
+enabled = true
