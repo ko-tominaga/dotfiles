@@ -95,11 +95,7 @@
       "Read(~/.pypirc)",
       "Read(~/.bundle/config)"
     ],
-    "defaultMode": "acceptEdits",
-    "deniedWebFetchPatterns": [
-      "Fetch(https://github.com/*)",
-      "Fetch(https://api.github.com/*)"
-    ]
+    "defaultMode": "acceptEdits"
   },
   "hooks": {
     "Notification": [
