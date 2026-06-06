@@ -15,6 +15,7 @@ chezmoiで管理されているdotfilesを安全に更新し、PRを作成する
 ## 環境情報
 
 - **chezmoiソースディレクトリ**: `$(chezmoi source-path)` で取得（通常 `~/.local/share/chezmoi`）
+- **GitHubリポジトリ**: `git -C "$(chezmoi source-path)" remote get-url origin` で取得
 - **ファイル命名規則**: chezmoiはドットファイルを `dot_` プレフィックスで管理する
   - 例: `.zshrc` → `dot_zshrc`, `.gitconfig` → `dot_gitconfig`
   - テンプレートファイルは `.tmpl` サフィックスが付く（例: `dot_zshrc.tmpl`）
@@ -58,8 +59,11 @@ chezmoi diff
 差分が確認できたら適用する:
 
 ```bash
-chezmoi apply
+chezmoi apply --force
 ```
+
+> **注意**: `chezmoi apply` はTTYを要求してインタラクティブプロンプトを出すことがある。
+> Bashツールからの実行では `--force` を付けて確認をスキップする。
 
 エラーが出た場合は原因を調査して対処する。
 
@@ -92,7 +96,6 @@ git -C "$CHEZMOI_DIR" push -u origin <branch-name>
 
 # PR作成
 gh pr create \
-  --repo ko-tominaga/dotfiles \
   --title "PRタイトル" \
   --body "変更内容の説明"
 ```
@@ -115,7 +118,7 @@ gh pr view --web
 | `chezmoi apply` でコンフリクト | `chezmoi diff` で詳細確認、手動解決後に再適用 |
 | テンプレートエラー | `.tmpl` ファイルのGoテンプレート構文を確認 |
 | push失敗（権限） | `gh auth status` で認証確認 |
-| PRの重複 | 既存PRを `gh pr list --repo ko-tominaga/dotfiles` で確認 |
+| PRの重複 | 既存PRを `gh pr list` で確認 |
 
 ## chezmoi ファイル名変換の参考
 
