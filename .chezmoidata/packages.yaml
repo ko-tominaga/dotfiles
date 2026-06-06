@@ -30,7 +30,6 @@ packages:
       - 'rubymine'
       - 'shottr'
       - 'slack'
-      - 'visual-studio-code'
       - 'warp'
       - '1password'
       - 'chatgpt'
