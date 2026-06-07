@@ -39,3 +39,4 @@ packages:
       - 'webcatalog'
       - 'codex-app'
       - 'discord'
+      - 'superwhisper'
