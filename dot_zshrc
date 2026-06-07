@@ -51,7 +51,7 @@ fbr() {
   local branches branch worktree_path
   branches=$(git branch -vv) || return
   branch=$(echo "$branches" | fzf +m) || return
-  branch=$(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+  branch=$(echo "$branch" | awk '{if ($1 == "*" || $1 == "+") print $2; else print $1}')
   # worktreeで既にチェックアウト済みの場合はそのディレクトリへcd
   worktree_path=$(git worktree list --porcelain | awk -v b="refs/heads/$branch" '/^worktree/{w=$2} $0 == "branch " b {print w}')
   if [ -n "$worktree_path" ]; then
