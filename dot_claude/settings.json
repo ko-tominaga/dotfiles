@@ -98,7 +98,7 @@
       "Read(~/.pypirc)",
       "Read(~/.bundle/config)"
     ],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "auto"
   },
   "hooks": {
     "Notification": [
