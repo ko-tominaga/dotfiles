@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+#
+# git cleanup-branches [-w|--worktrees]
+#
+# カレントブランチ以外のローカルブランチを全部削除する。
+# -w / --worktrees を付けるとカレント以外の worktree も先に全部削除し、
+# それらに紐づいていたブランチも削除できるようにする。
+#
+# worktree でチェックアウト中のブランチは削除できないため、-w なしの場合は
+# git 自身がそのブランチをスキップしてエラーメッセージを出す（他のブランチの
+# 削除は継続する）。
+set -u
+
+del_wt=0
+case "${1:-}" in
+  -w | --worktrees) del_wt=1 ;;
+  "") ;;
+  *)
+    echo "unknown option: $1 (use -w/--worktrees to also remove worktrees)" >&2
+    exit 1
+    ;;
+esac
+
+current=$(git symbolic-ref --quiet --short HEAD) || {
+  echo "detached HEAD のため中止する" >&2
+  exit 1
+}
+
+if [ "$del_wt" -eq 1 ]; then
+  main_wt=$(git rev-parse --show-toplevel)
+  git worktree list --porcelain | sed -n 's/^worktree //p' | while IFS= read -r wt; do
+    [ "$wt" = "$main_wt" ] && continue
+    git worktree remove --force "$wt"
+  done
+  git worktree prune
+fi
+
+git for-each-ref --format='%(refname:short)' refs/heads/ | grep -vxF "$current" | while IFS= read -r branch; do
+  git branch -D "$branch"
+done
+
+exit 0
