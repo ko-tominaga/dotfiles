@@ -9,21 +9,6 @@
         "@upstash/context7-mcp"
       ],
       "env": {}
-    },
-    "github": {
-      "type": "stdio",
-      "command": "mcp-proxy",
-      "args": [
-        "--transport",
-        "streamablehttp",
-        "-H",
-        "Authorization",
-        "Bearer ${GITHUB_TOKEN}",
-        "https://api.githubcopilot.com/mcp/"
-      ],
-      "env": {
-        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
-      }
     }
   }
 }
