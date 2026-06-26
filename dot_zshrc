@@ -47,18 +47,12 @@ fi
 # -------------------
 # checkout git branch
 # -------------------
+# 本体は ~/.local/bin/git-fbr に切り出してある。worktree への cd だけは
+# 親シェルで行う必要があるため、ここでパスを受け取って cd する。
 fbr() {
-  local branches branch worktree_path
-  branches=$(git branch -vv) || return
-  branch=$(echo "$branches" | fzf +m) || return
-  branch=$(echo "$branch" | awk '{if ($1 == "*" || $1 == "+") print $2; else print $1}')
-  # worktreeで既にチェックアウト済みの場合はそのディレクトリへcd
-  worktree_path=$(git worktree list --porcelain | awk -v b="refs/heads/$branch" '/^worktree/{w=$2} $0 == "branch " b {print w}')
-  if [ -n "$worktree_path" ]; then
-    cd "$worktree_path"
-  else
-    git checkout "$branch"
-  fi
+  local worktree_path
+  worktree_path=$(git fbr) || return
+  [ -n "$worktree_path" ] && cd "$worktree_path"
 }
 
 # -------------------
@@ -89,3 +83,6 @@ git_prompt() {
 precmd() {
   git_prompt
 }
+
+eval "$(direnv hook zsh)"
+export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"

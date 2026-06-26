@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+#
+# git fbr
+#
+# fzf でローカルブランチを選んでチェックアウトする。
+# 選んだブランチが既に worktree でチェックアウト済みの場合は checkout せず、
+# その worktree のパスを標準出力に出力する（呼び出し側で cd するため）。
+#
+# cd は子プロセスから親シェルへ反映できないため、worktree への移動が必要な
+# ケースだけパスを返し、実際の cd は呼び出し元のシェル関数に任せる。
+set -u
+
+branches=$(git branch -vv) || exit
+branch=$(echo "$branches" | fzf +m) || exit
+branch=$(echo "$branch" | awk '{if ($1 == "*" || $1 == "+") print $2; else print $1}')
+
+# worktree で既にチェックアウト済みの場合はそのパスを出力する
+worktree_path=$(git worktree list --porcelain | awk -v b="refs/heads/$branch" '/^worktree/{w=$2} $0 == "branch " b {print w}')
+if [ -n "$worktree_path" ]; then
+  echo "$worktree_path"
+else
+  git checkout "$branch"
+fi
