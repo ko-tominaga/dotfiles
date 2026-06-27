@@ -18,6 +18,7 @@ packages:
       - 'awscli'
       - 'mcp-proxy'
       - 'codex'
+      - 'googleworkspace-cli'
     casks:
       - 'cursor'
       - 'deepl'
@@ -39,3 +40,4 @@ packages:
       - 'codex-app'
       - 'discord'
       - 'superwhisper'
+      - 'gcloud-cli'
