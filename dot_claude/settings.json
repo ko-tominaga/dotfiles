@@ -68,7 +68,6 @@
       "Bash(git stash:*)",
       "Bash(chezmoi:*)",
       "Bash(bundle:*)",
-      "Read(~/.ai_agents/*)",
       "Skill(create-pr)",
       "Skill(create-pr-body)",
       "Skill(example-skills:skill-creator)",
