@@ -135,7 +135,6 @@
         "hooks": [
           {
             "type": "command",
-            "if": "Bash(git push:*)",
             "command": "~/.claude/hooks/block-push-to-main.sh"
           }
         ]
