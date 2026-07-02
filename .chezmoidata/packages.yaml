@@ -19,6 +19,7 @@ packages:
       - 'mcp-proxy'
       - 'codex'
       - 'googleworkspace-cli'
+      - 'gitleaks'
     casks:
       - 'cursor'
       - 'deepl'

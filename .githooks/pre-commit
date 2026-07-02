@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# gitleaks でステージ済みの変更に秘匿情報が含まれていないかチェックする pre-commit フック。
+# core.hooksPath=.githooks が設定されていると git commit 時に自動実行される。
+set -euo pipefail
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "[pre-commit] gitleaks が見つかりません。'brew bundle' などでインストールしてください。" >&2
+  exit 1
+fi
+
+gitleaks protect --staged --redact -v --no-banner

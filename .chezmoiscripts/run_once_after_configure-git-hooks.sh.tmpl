@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# このリポジトリ (chezmoi source repo) 自体の git フックとして .githooks を使うよう設定する。
+# gitleaks による pre-commit の秘匿情報チェックを有効化するため。
+set -euo pipefail
+
+SRC_DIR="$(chezmoi source-path)"
+
+if [ -d "${SRC_DIR}/.git" ]; then
+  git -C "${SRC_DIR}" config core.hooksPath .githooks
+  echo "[git-hooks] core.hooksPath を .githooks に設定しました。"
+fi
