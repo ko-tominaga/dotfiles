@@ -1,6 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "includeCoAuthoredBy": true,
+  "model": "sonnet",
   "permissions": {
     "allow": [
       "List(*)",
