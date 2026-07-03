@@ -6,7 +6,6 @@ alias ls="ls -lah"
 alias che="chezmoi"
 alias python="python3"
 alias gwr='git gtr'
-alias clauded='claude --dangerously-skip-permissions'
 alias eche='cursor "$(chezmoi source-path)"'
 
 # -------------------
