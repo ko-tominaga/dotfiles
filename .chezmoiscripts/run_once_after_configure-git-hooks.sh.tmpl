@@ -3,7 +3,7 @@
 # gitleaks による pre-commit の秘匿情報チェックを有効化するため。
 set -euo pipefail
 
-SRC_DIR="$(chezmoi source-path)"
+SRC_DIR="${CHEZMOI_SOURCE_DIR}"
 
 if [ -d "${SRC_DIR}/.git" ]; then
   git -C "${SRC_DIR}" config core.hooksPath .githooks
