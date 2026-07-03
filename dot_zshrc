@@ -18,6 +18,13 @@ PROMPT="%F{green}%n%f %F{cyan}($(arch))%f:%F{blue}%~%f"$'\n'"%# "
 source $(brew --prefix)/opt/zsh-git-prompt/zshrc.sh
 
 # -------------------
+# Claude Code Settings
+# -------------------
+# /model で切り替えても settings.json に保存され次回起動時に残ってしまうため、
+# 環境変数でデフォルトを固定する。--model フラグはこれより優先される。
+export ANTHROPIC_MODEL=sonnet
+
+# -------------------
 # Path Settings
 # -------------------
 export PATH="/Applications/RubyMine.app/Contents/MacOS:$PATH"
