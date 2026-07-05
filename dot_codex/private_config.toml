@@ -1,31 +1,28 @@
-# Codex configuration file
-# See: https://github.com/openai/codex/blob/main/docs/config.md
+#:schema https://developers.openai.com/codex/config-schema.json
 
 # Approval policy: when to prompt for approval
 # Options: "untrusted", "on-failure", "on-request", "never"
-approval_policy = "never"
+approval_policy = "on-request"
 
 # Sandbox mode: controls what commands can access
 # Options: "read-only", "workspace-write", "danger-full-access"
-sandbox_mode = "danger-full-access"
+sandbox_mode = "workspace-write"
 
 notify = ["bash", "-lc", "afplay /System/Library/Sounds/Ping.aiff"]
-model = "gpt-5.4"
+model = "gpt-5.5"
+model_reasoning_effort = "medium"
 
 [sandbox_workspace_write]
 # Allow network access in workspace-write mode
 network_access = true
 
-[mcp_servers.github]
-url = "https://api.githubcopilot.com/mcp/"
-bearer_token_env_var = "GITHUB_TOKEN"
-
 [mcp_servers.context7]
 command = "npx"
 args = [
-  "--transport",
   "-y",
-  "@upstash/context7-mcp"
+  "@upstash/context7-mcp",
+  "--transport",
+  "stdio"
 ]
 
 [plugins."github@openai-curated"]
@@ -33,3 +30,9 @@ enabled = true
 
 [plugins."google-drive@openai-curated"]
 enabled = true
+
+[tui.model_availability_nux]
+"gpt-5.5" = 1
+
+[notice.model_migrations]
+"gpt-5.4" = "gpt-5.5"
