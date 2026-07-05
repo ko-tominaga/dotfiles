@@ -1,7 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "includeCoAuthoredBy": true,
-  "model": "sonnet",
   "permissions": {
     "allow": [
       "List(*)",
@@ -164,17 +163,17 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
   "enabledPlugins": {
     "example-skills@anthropic-agent-skills": true,
     "context7@claude-plugins-official": true,
     "code-review@claude-plugins-official": true,
     "ruby-lsp@claude-plugins-official": true,
-    "wantedly-dev@wantedly-cc-plugins": true
+    "posthog@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
-  "skipDangerousModePermissionPrompt": true,
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh"
-  }
+  "skipDangerousModePermissionPrompt": true
 }
