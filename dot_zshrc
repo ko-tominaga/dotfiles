@@ -53,6 +53,13 @@ if type brew &>/dev/null; then
 fi
 
 # -------------------
+# fzf (Ctrl+R: history / Ctrl+T: files / Alt+C: cd)
+# -------------------
+if type fzf &>/dev/null; then
+  source <(fzf --zsh)
+fi
+
+# -------------------
 # checkout git branch
 # -------------------
 # 本体は ~/.local/bin/git-fbr に切り出してある。worktree への cd だけは
@@ -74,7 +81,7 @@ fi
 # bindkeys
 # -------------------
 zle -N bind_fbr fbr
-bindkey '^T' bind_fbr
+bindkey '^G' bind_fbr
 
 # -------------------
 # Git Prompt Function (for git status in prompt)
