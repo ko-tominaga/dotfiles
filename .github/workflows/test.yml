@@ -56,3 +56,9 @@ jobs:
         run: |
           echo "Checking what would be changed..."
           chezmoi diff || true
+
+      - name: Install bats-core
+        run: brew install bats-core
+
+      - name: Run hook tests
+        run: bats tests/hooks/*.bats
