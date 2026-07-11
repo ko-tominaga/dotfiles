@@ -20,7 +20,6 @@ packages:
       - 'codex'
       - 'googleworkspace-cli'
       - 'gitleaks'
-      - 'bats-core'
     casks:
       - 'cursor'
       - 'deepl'
