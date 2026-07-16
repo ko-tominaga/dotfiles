@@ -1,4 +1,4 @@
-keybind = global:opt+space=new_window
+keybind = global:opt+space=toggle_quick_terminal
 background-opacity = 0.85
 background-blur-radius = 20
 cursor-style = block
