@@ -44,3 +44,4 @@ packages:
       - 'discord'
       - 'superwhisper'
       - 'gcloud-cli'
+      - 'ghostty'
