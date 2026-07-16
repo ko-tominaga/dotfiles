@@ -9,6 +9,16 @@ alias gwr='git gtr'
 alias eche='cursor "$(chezmoi source-path)"'
 
 # -------------------
+# chezmoi update (main専用)
+# -------------------
+# 通常の `chezmoi update` はchezmoiソースの現在のブランチのままupdateする
+# (作業ブランチでのテスト用にそのままにしておきたい)。
+# mainの最新dotfilesを明示的に取り込みたい時だけこちらを使う。
+chezmoi-update-main() {
+  chezmoi git -- checkout main && chezmoi update
+}
+
+# -------------------
 # Zsh Prompt Settings
 # -------------------
 autoload -Uz colors && colors
