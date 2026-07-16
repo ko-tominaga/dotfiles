@@ -1,0 +1,25 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+# Spotlight のデフォルトホットキー (⌘Space / ⌘⌥Space) を無効化する。
+# Raycast のグローバルホットキーを ⌘Space に割り当てるための前準備。
+set -euo pipefail
+
+log() { printf '[spotlight-hotkey] %s\n' "$*"; }
+
+PLIST_PATH="${HOME}/Library/Preferences/com.apple.symbolichotkeys.plist"
+
+set_disabled() {
+  local key="$1"
+  /usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:${key}:enabled false" "${PLIST_PATH}" 2>/dev/null \
+    || /usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:${key}:enabled bool false" "${PLIST_PATH}"
+}
+
+log "Disabling Spotlight hotkeys (key 64: Show Spotlight search, key 65: Show Finder search window)..."
+set_disabled 64
+set_disabled 65
+
+killall cfprefsd >/dev/null 2>&1 || true
+killall SystemUIServer >/dev/null 2>&1 || true
+
+log "Done. ログアウト/ログインしないと反映されない場合があります。"
+{{- end -}}
