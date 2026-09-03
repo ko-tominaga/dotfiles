@@ -24,6 +24,7 @@ packages:
       - 'direnv'
       - 'bat'
       - 'git-delta'
+      - 'crit'
     casks:
       - 'cursor'
       - 'deepl'
