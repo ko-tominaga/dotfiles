@@ -48,3 +48,4 @@ packages:
       - 'superwhisper'
       - 'gcloud-cli'
       - 'ghostty'
+      - 'chrome-remote-desktop-host'
