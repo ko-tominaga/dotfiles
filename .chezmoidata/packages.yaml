@@ -25,6 +25,7 @@ packages:
       - 'bat'
       - 'git-delta'
       - 'crit'
+      - 'hunk'
     casks:
       - 'cursor'
       - 'deepl'
