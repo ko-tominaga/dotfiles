@@ -70,6 +70,13 @@ if type fzf &>/dev/null; then
 fi
 
 # -------------------
+# herdr
+# -------------------
+if type herdr &>/dev/null; then
+  eval "$(herdr completion zsh)"
+fi
+
+# -------------------
 # checkout git branch
 # -------------------
 # 本体は ~/.local/bin/git-fbr に切り出してある。worktree への cd だけは
