@@ -117,4 +117,14 @@ precmd() {
 }
 
 eval "$(direnv hook zsh)"
+
+# カレントディレクトリの .env を direnv で読み込む .envrc を作成して許可する
+denv() {
+  if [[ ! -f .envrc ]]; then
+    echo "dotenv_if_exists .env" > .envrc
+  elif ! grep -q "^dotenv" .envrc; then
+    echo "dotenv_if_exists .env" >> .envrc
+  fi
+  direnv allow
+}
 export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
