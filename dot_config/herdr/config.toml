@@ -2,15 +2,28 @@ onboarding = false
 [theme]
 name = "tokyo-night"
 
+auto_switch = false
 [keys]
 prefix = "ctrl+space"
-previous_tab = ""
-next_tab = ""
-switch_tab = ""
+previous_tab = "prefix+shift+["
+next_tab = "prefix+shift+]"
 previous_agent = "prefix+p"
 next_agent = "prefix+n"
 focus_agent = "prefix+1..9"
 
 [ui]
 agent_panel_sort = "spaces"
+sidebar_width = 40
+sidebar_min_width = 18 
+sidebar_max_width = 60 
 
+[ui.sidebar.agents]
+rows = [
+  ["state_icon", "workspace", "tab"],
+  ["agent", "state_text"],
+  ["terminal_title_stripped"],
+]
+row_gap = 1
+
+[experimental]
+kitty_graphics = true
