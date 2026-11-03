@@ -26,6 +26,7 @@ packages:
       - 'git-delta'
       - 'crit'
       - 'hunk'
+      - 'mobai-app/tap/simslim'
     casks:
       - 'cursor'
       - 'deepl'
