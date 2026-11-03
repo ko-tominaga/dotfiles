@@ -32,7 +32,7 @@ source $(brew --prefix)/opt/zsh-git-prompt/zshrc.sh
 # -------------------
 # /model で切り替えても settings.json に保存され次回起動時に残ってしまうため、
 # 環境変数でデフォルトを固定する。--model フラグはこれより優先される。
-export ANTHROPIC_MODEL=sonnet
+export ANTHROPIC_MODEL=opus
 
 # -------------------
 # Path Settings
